@@ -55,6 +55,17 @@ gulpfile.task('clean')
   });
 ```
 
+Define a task that uses serial or parallel composition:
+
+```js
+// Use the standalone series and parallel to compose further
+var series = require('gulpfile-editor').series;
+var parallel = require('gulpfile-editor').parallel;
+
+gulpfile.task('default').series('clean', 'build', 'server');
+gulpfile.task('build').parallel('sass', 'javascript');
+```
+
 Define files to watch:
 
 ```js
