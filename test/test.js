@@ -71,9 +71,9 @@ describe('Gulp Task', () => {
 describe('Task Composition', () => {
   it('series and parallel', () => {
     var gulpfile = new Gulpfile();
-    gulpfile.task('build')
+    gulpfile.task('build', {cli: true})
       .series('clean', parallel('sass', 'javascript'), 'server');
 
-    console.log(gulpfile.task('build')._composition);
+    console.log(gulpfile.toString());
   });
 });
