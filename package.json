@@ -1,0 +1,31 @@
+{
+  "name": "gulpfile-editor",
+  "version": "0.0.1",
+  "description": "Programmatically generate a Gulpfile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gakimball/gulpfile-editor.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulpfile",
+    "editor"
+  ],
+  "author": "Geoff Kimball <geoff@geoffkimball.com> (http://geoffkimball.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gakimball/gulpfile-editor/issues"
+  },
+  "homepage": "https://github.com/gakimball/gulpfile-editor#readme",
+  "dependencies": {
+    "camelcase": "^2.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
