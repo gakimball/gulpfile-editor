@@ -60,7 +60,7 @@ class Gulpfile {
         let pipes = task._pipes.concat(task._dest);
         for (let i in pipes) {
           let pipe = pipes[i];
-          text += `.pipe(${pipe.function}())\n`;
+          text += `.pipe(${pipe.function}(${pipe.params.join(', ')}))\n`;
         }
       }
       text += '}';
@@ -93,12 +93,21 @@ class GulpTask {
   dest(globs, opts) {
     this._dest = {
       function: 'gulp.dest',
-      params: [globs]
+      params: [globs].concat(opts || [])
     };
+
     return this;
   }
 
-  pipe(plugin) {}
+  pipe(plugin) {
+    let args = Array.prototype.slice.call(arguments, 1);
+    this._pipes.push({
+      function: plugin,
+      params: args || []
+    });
+
+    return this;
+  }
 
   func(fn) {
     if (typeof fn !== 'function') {

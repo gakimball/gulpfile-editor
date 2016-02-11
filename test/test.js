@@ -52,6 +52,14 @@ describe('Gulp Task', () => {
   it('can have a source and destination', () => {
     var gulpfile = new Gulpfile();
     gulpfile.task('copy').src('src/**/*').dest('dist');
+  });
+
+  it('can have pipes to plugins', () => {
+    var gulpfile = new Gulpfile();
+    gulpfile.task('sass')
+      .src('src/**/*')
+      .pipe('sass', '{ loadPaths: "scss"}')
+      .dest('dist');
 
     console.log(gulpfile.toString());
   });
