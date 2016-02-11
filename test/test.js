@@ -63,4 +63,4 @@ describe('Gulp Task', () => {
 
     console.log(gulpfile.toString());
   });
-})
+});
