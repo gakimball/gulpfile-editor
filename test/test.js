@@ -1,5 +1,8 @@
 var expect = require('chai').expect;
 var Gulpfile = require('..');
+var series = require('../lib/compose').series;
+var parallel = require('../lib/compose').parallel;
+var serialize = require('../lib/compose').serialize;
 
 describe('Gulpfile', () => {
   it('creates a new plugin instance', () => {
@@ -62,5 +65,15 @@ describe('Gulp Task', () => {
       .dest('dist');
 
     console.log(gulpfile.toString());
+  });
+});
+
+describe('Task Composition', () => {
+  it('series and parallel', () => {
+    var gulpfile = new Gulpfile();
+    gulpfile.task('build')
+      .series('clean', parallel('sass', 'javascript'), 'server');
+
+    console.log(gulpfile.task('build')._composition);
   });
 });
