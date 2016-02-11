@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/gakimball/gulpfile-editor#readme",
   "dependencies": {
-    "camelcase": "^2.1.0"
+    "camelcase": "^2.1.0",
+    "function-to-string": "^0.2.0",
+    "js-beautify": "^1.6.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

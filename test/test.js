@@ -1,13 +1,13 @@
 var expect = require('chai').expect;
 var Gulpfile = require('..');
 
-describe('Gulpfile', function() {
-  it('creates a new plugin instance', function() {
+describe('Gulpfile', () => {
+  it('creates a new plugin instance', () => {
     var gulpfile = new Gulpfile();
     expect(gulpfile).to.be.an('object');
   });
 
-  it('can add Gulp plugin requires', function() {
+  it('can add Gulp plugin requires', () => {
     var gulpfile = new Gulpfile();
     var g = gulpfile
       .require('run-sequence')
@@ -22,6 +22,37 @@ describe('Gulpfile', function() {
     expect(output).to.contain('var sass = require(\'gulp-sass\')', 'Gulp plugins are added as variables without gulp- at the beginning');
   });
 
-  it('can add non-Gulp plugin requires', function() {
-  })
+  it('creates new tasks', () => {
+    var gulpfile = new Gulpfile();
+    var task = gulpfile.task('clean');
+    expect(task).to.be.an('object');
+  });
 });
+
+describe('Gulp Task', () => {
+  it('has a name and options', () => {
+    var gulpfile = new Gulpfile();
+    var task = gulpfile.task('clean');
+
+    expect(task).to.be.an('object');
+    expect(task.options).to.be.an('object');
+  });
+
+  it('can be represented as a function', () => {
+    var gulpfile = new Gulpfile();
+    gulpfile.task('clean').func(func);
+
+    expect(gulpfile.toString()).to.contain('del');
+
+    function func() {
+      return del('dist');
+    }
+  });
+
+  it('can have a source and destination', () => {
+    var gulpfile = new Gulpfile();
+    gulpfile.task('copy').src('src/**/*').dest('dist');
+
+    console.log(gulpfile.toString());
+  });
+})
