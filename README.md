@@ -55,6 +55,14 @@ gulpfile.task('clean')
   });
 ```
 
+Define files to watch:
+
+```js
+gulpfile
+  .watch('scss/**/*', 'sass')
+  .watch('js/**/*', 'js');
+```
+
 Print your Gulpfile and write it to disk:
 
 ```js

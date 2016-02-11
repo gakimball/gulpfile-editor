@@ -30,6 +30,12 @@ describe('Gulpfile', () => {
     var task = gulpfile.task('clean');
     expect(task).to.be.an('object');
   });
+
+  it.only('can define files to watch', () => {
+    var gulpfile = new Gulpfile();
+    gulpfile.watch(['scss/**/*'], series('sass', 'browser.reload'));
+    console.log(gulpfile.toString());
+  });
 });
 
 describe('Gulp Task', () => {
@@ -64,7 +70,7 @@ describe('Gulp Task', () => {
       .pipe('sass', '{ loadPaths: "scss"}')
       .dest('dist');
 
-    console.log(gulpfile.toString());
+    // console.log(gulpfile.toString());
   });
 });
 
@@ -74,6 +80,6 @@ describe('Task Composition', () => {
     gulpfile.task('build', {cli: true})
       .series('clean', parallel('sass', 'javascript'), 'server');
 
-    console.log(gulpfile.toString());
+    // console.log(gulpfile.toString());
   });
 });
