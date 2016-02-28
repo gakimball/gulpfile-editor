@@ -34,13 +34,31 @@ describe('Gulpfile', () => {
     expect(output).to.contain('function clean()');
   });
 
-  it('can define files to watch', () => {
-    var gulpfile = new Gulpfile();
-    gulpfile.watch('single', 'singleFunction');
-    gulpfile.watch('task', '"singleTask"');
-    gulpfile.watch(['series'], series('sass', 'browser.reload'));
+  describe('watch()', () => {
+    it('can define a function to run when a file changes', () => {
+      var gulpfile = new Gulpfile();
+      gulpfile.watch('file.html', 'task');
 
-    console.log(gulpfile.toString());
+      var output = gulpfile.toString();
+      expect(output).to.contain(`gulp.watch('file.html'`);
+      expect(output).to.contain(', task)');
+    });
+
+    it('can define a task to run when a file changes', () => {
+      var gulpfile = new Gulpfile();
+      gulpfile.watch('file.html', '"task"');
+
+      var output = gulpfile.toString();
+      expect(output).to.contain(`, 'task')`);
+    });
+
+    it('can define a task composition to run when a file changes', () => {
+      var gulpfile = new Gulpfile();
+      gulpfile.watch('file.html', series('sass', 'browser.reload'));
+
+      var output = gulpfile.toString();
+      expect(output).to.contain(`gulp.series`);
+    });
   });
 });
 
