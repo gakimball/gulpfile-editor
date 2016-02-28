@@ -29,11 +29,17 @@ describe('Gulpfile', () => {
     var gulpfile = new Gulpfile();
     var task = gulpfile.task('clean');
     expect(task).to.be.an('object');
+
+    var output = gulpfile.toString();
+    expect(output).to.contain('function clean()');
   });
 
-  it.only('can define files to watch', () => {
+  it('can define files to watch', () => {
     var gulpfile = new Gulpfile();
-    gulpfile.watch(['scss/**/*'], series('sass', 'browser.reload'));
+    gulpfile.watch('single', 'singleFunction');
+    gulpfile.watch('task', '"singleTask"');
+    gulpfile.watch(['series'], series('sass', 'browser.reload'));
+
     console.log(gulpfile.toString());
   });
 });
